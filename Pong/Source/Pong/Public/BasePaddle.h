@@ -6,18 +6,23 @@
 #include "GameFramework/Pawn.h"
 #include "BasePaddle.generated.h"
 
+
+
 UCLASS()
 class PONG_API ABasePaddle : public APawn
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="Mesh Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Pong | Mesh Component")
 	TObjectPtr<UStaticMeshComponent> MeshComponent;
 
+
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Pong | Movement Controls")
 	float PaddleSpeed;
-
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="")
+	float m_Direction;
+	FVector InitialPositon;
 
 
 public:
@@ -34,4 +39,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void MovePaddle(float Direction);
 };

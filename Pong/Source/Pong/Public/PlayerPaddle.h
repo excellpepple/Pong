@@ -6,8 +6,12 @@
 #include "BasePaddle.h"
 #include "PlayerPaddle.generated.h"
 
+
+struct FInputActionValue;
+class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
+class UInputMappingContext;
 
 UCLASS()
 class PONG_API APlayerPaddle : public ABasePaddle
@@ -17,15 +21,18 @@ class PONG_API APlayerPaddle : public ABasePaddle
 public:
 	// Sets default values for this pawn's properties
 	APlayerPaddle();
+	UPROPERTY(EditAnywhere, Category="Player Input")
+	TObjectPtr<UInputMappingContext> MappingContext;
+	UPROPERTY(EditAnywhere, Category="Player Input")
+	TObjectPtr<UInputAction> MoveAction;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Camera Component")
-	TObjectPtr<UCameraComponent> CameraComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="SpringArm Component")
-	TObjectPtr<USpringArmComponent> SpringArmComponent;
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void Move(const FInputActionValue& Value);
+	void StopMovement();
 
 public:
 	// Called every frame
