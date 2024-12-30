@@ -7,6 +7,7 @@
 #include "GameFramework/HUD.h"
 #include "PongHud.generated.h"
 
+class UGameOverScreen;
 class UScoreWidget;
 class UTextBlock;
 /**
@@ -19,9 +20,14 @@ class PONG_API APongHud : public AHUD
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UScoreWidget* ScoreWidget;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UGameOverScreen* GameOverScreen;
+
+	// Functions
 	UFUNCTION(BlueprintCallable)
 	void UpdateUI();
-
+	UFUNCTION(BlueprintCallable)
+	void ShowGameOverScreen(const FText& Winner);
 
 
 };

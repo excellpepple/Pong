@@ -13,11 +13,11 @@ void APongGM::Score(GoalType Winner)
 	switch (Winner)
 	{
 	case GoalType::Player1:
-		Player1Score++;
+		Player2Score++;
 		UpdateUI();
 		break;
 	case GoalType::AI:
-		Player2Score++;
+		Player1Score++;
 		UpdateUI();
 		break;
 	default:
@@ -33,5 +33,27 @@ void APongGM::UpdateUI()
 	if(GameHud)
 	{
 		GameHud->UpdateUI();
+
+		if (Player1Score == MaxScore)
+		{
+			WinnerText = FText::FromString("Player 1 Wins");
+			GameHud->ShowGameOverScreen(WinnerText);
+		}
+		if (Player2Score == MaxScore)
+		{
+			WinnerText = FText::FromString("Player 2 Wins");
+			GameHud->ShowGameOverScreen(WinnerText);
+		}
+
+	}
+}
+
+void APongGM::PauseGame()
+{
+	APlayerController* const MyPlayer = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
+	if (MyPlayer != NULL)
+	{
+		bIsPaused = true;
+		MyPlayer->SetPause(bIsPaused);
 	}
 }

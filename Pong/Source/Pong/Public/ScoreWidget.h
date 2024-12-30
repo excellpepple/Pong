@@ -20,6 +20,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTextBlock* Player2Txt;
 
+
 	UFUNCTION(BlueprintCallable)
 	void UpdateScores();
 
